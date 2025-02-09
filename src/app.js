@@ -36,6 +36,22 @@ app.get("/user/:userId/:name/:password", (req, res) => {
   res.send({ firstName: "Ayush", lastName: "Mishra" });
 });
 
+//node can handle multiple responses
+
+app.use(
+  "/user",
+  (req, res, next) => {
+    console.log("Console Log from first function");
+    //what if we dont send any response so we just do
+    next();
+    //res.send("Hello from the server hello");
+  },
+  (req, res) => {
+    console.log("Console form second function");
+    res.send("Hello from function 2");
+  }
+);
+
 app.listen(3000, () => {
   console.log("Server lsitening on 3000");
 });
